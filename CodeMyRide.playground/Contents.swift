@@ -29,6 +29,16 @@ headlightSprite.position = CGPoint(x: 480, y: 240)
 headlightSprite.size = CGSize(width: 60, height: 30)
 scene.addChild(headlightSprite)
 
+var brakelightSprite = SKSpriteNode(imageNamed: "brakelight")
+brakelightSprite.position = CGPoint(x: 50, y: 250)
+brakelightSprite.size = CGSize(width: 40, height: 30)
+scene.addChild(brakelightSprite)
+
+var wiperSprite = SKSpriteNode(imageNamed: "wiper")
+wiperSprite.position = CGPoint(x: 322, y: 305)
+wiperSprite.size = CGSize(width: 50, height: 50)
+scene.addChild(wiperSprite)
+
 var view = SKView(frame: frame)
 view.presentScene(scene)
 
