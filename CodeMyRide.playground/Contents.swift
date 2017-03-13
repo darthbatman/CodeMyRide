@@ -93,10 +93,10 @@ wiperSprite.removeAction(forKey: "wipe")
 
 // start raining
 var rainParticle = SKEmitterNode()
-rainParticle.particleLifetime = 2
+rainParticle.particleLifetime = 1
 rainParticle.particleBlendMode = .alpha
-rainParticle.particleBirthRate = 10
-rainParticle.particleSpeed = 160
+rainParticle.particleBirthRate = 40
+rainParticle.particleSpeed = 320
 rainParticle.emissionAngle = 1.5 * .pi
 rainParticle.particleSize = CGSize(width: 3, height: 4)
 rainParticle.particleColor = UIColor.blue
