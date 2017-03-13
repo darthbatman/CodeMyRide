@@ -90,3 +90,17 @@ wiperSprite.run(SKAction.repeatForever(SKAction.sequence([SKAction.rotate(byAngl
 
 // turn off windshield wiper
 wiperSprite.removeAction(forKey: "wipe")
+
+// start raining
+var rainParticle = SKEmitterNode()
+rainParticle.particleLifetime = 2
+rainParticle.particleBlendMode = .alpha
+rainParticle.particleBirthRate = 10
+rainParticle.particleSpeed = 160
+rainParticle.emissionAngle = 1.5 * .pi
+rainParticle.particleSize = CGSize(width: 3, height: 4)
+rainParticle.particleColor = UIColor.blue
+rainParticle.position = CGPoint(x: 256, y: 500)
+rainParticle.particlePositionRange = CGVector(dx: scene.frame.size.width, dy: 0)
+scene.addChild(rainParticle)
+
