@@ -2,14 +2,16 @@ import SpriteKit
 
 public class Car: SKView {
     
-    var backgroundSprite0: SKSpriteNode = SKSpriteNode()
-    var backgroundSprite1: SKSpriteNode = SKSpriteNode()
-    var carBodySprite: SKSpriteNode = SKSpriteNode()
-    var wheelBackSprite: SKSpriteNode = SKSpriteNode()
-    var wheelFrontSprite: SKSpriteNode = SKSpriteNode()
-    var headlightSprite: SKSpriteNode = SKSpriteNode()
-    var brakelightSprite: SKSpriteNode = SKSpriteNode()
-    var wiperSprite: SKSpriteNode = SKSpriteNode()
+    public var backgroundSprite0: SKSpriteNode = SKSpriteNode()
+    public var backgroundSprite1: SKSpriteNode = SKSpriteNode()
+    public var carBodySprite: SKSpriteNode = SKSpriteNode()
+    public var wheelBackSprite: SKSpriteNode = SKSpriteNode()
+    public var wheelFrontSprite: SKSpriteNode = SKSpriteNode()
+    public var headlightSprite: SKSpriteNode = SKSpriteNode()
+    public var brakelightSprite: SKSpriteNode = SKSpriteNode()
+    public var wiperSprite: SKSpriteNode = SKSpriteNode()
+    public var acceleratorPedalSprite: SKSpriteNode = SKSpriteNode()
+    public var brakePedalSprite: SKSpriteNode = SKSpriteNode()
     
     var rainParticle: SKEmitterNode = SKEmitterNode()
     
@@ -61,6 +63,16 @@ public class Car: SKView {
         wiperSprite.position = CGPoint(x: 347, y: 280)
         wiperSprite.size = CGSize(width: 50, height: 50)
         scene.addChild(wiperSprite)
+        
+        acceleratorPedalSprite = SKSpriteNode(imageNamed: "pedal")
+        acceleratorPedalSprite.size = CGSize(width: 30, height: 60)
+        acceleratorPedalSprite.position = CGPoint(x: 480, y: 260)
+        scene.addChild(acceleratorPedalSprite)
+        
+        brakePedalSprite = SKSpriteNode(imageNamed: "pedal")
+        brakePedalSprite.size = CGSize(width: 30, height: 60)
+        brakePedalSprite.position = CGPoint(x: 32, y: 260)
+        scene.addChild(brakePedalSprite)
         
         headlightSprite.isHidden = true
         brakelightSprite.isHidden = true
@@ -150,6 +162,14 @@ public class Car: SKView {
     public func becomeDay(){
         backgroundSprite0.texture = SKTexture(imageNamed: "background")
         backgroundSprite1.texture = SKTexture(imageNamed: "background")
+    }
+    
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("\((touches.first?.location(in: brakePedalSprite).x)!), \((touches.first?.location(in: brakePedalSprite).y)!)")
+        print("\(brakePedalSprite.size.width), \(brakePedalSprite.size.height)")
+        if (abs((touches.first?.location(in: brakePedalSprite).x)!) <= (brakePedalSprite.size.width / 2) && abs((touches.first?.location(in: brakePedalSprite).y)!) <= (brakePedalSprite.size.height / 2)){
+            print("brakePedalSprite tapped")
+        }
     }
     
     required public init?(coder aDecoder: NSCoder) {
