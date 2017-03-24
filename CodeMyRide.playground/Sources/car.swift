@@ -13,6 +13,9 @@ public class Car: SKView {
     public var acceleratorPedalSprite: SKSpriteNode = SKSpriteNode()
     public var brakePedalSprite: SKSpriteNode = SKSpriteNode()
     
+    public var acceleratorPedalSpriteTapped: Bool = false
+    public var brakePedalSpriteTapped: Bool = false
+    
     var rainParticle: SKEmitterNode = SKEmitterNode()
     
     public init(){
@@ -165,11 +168,20 @@ public class Car: SKView {
     }
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("\((touches.first?.location(in: brakePedalSprite).x)!), \((touches.first?.location(in: brakePedalSprite).y)!)")
-        print("\(brakePedalSprite.size.width), \(brakePedalSprite.size.height)")
         if (abs((touches.first?.location(in: brakePedalSprite).x)!) <= (brakePedalSprite.size.width / 2) && abs((touches.first?.location(in: brakePedalSprite).y)!) <= (brakePedalSprite.size.height / 2)){
             print("brakePedalSprite tapped")
+            brakePedalSpriteTapped = true
         }
+        else if (abs((touches.first?.location(in: acceleratorPedalSprite).x)!) <= (acceleratorPedalSprite.size.width / 2) && abs((touches.first?.location(in: acceleratorPedalSprite).y)!) <= (acceleratorPedalSprite.size.height / 2)){
+            print("acceleratorPedalSprite tapped")
+            acceleratorPedalSpriteTapped = true
+        }
+    }
+    
+    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touches ended")
+        brakePedalSpriteTapped = false
+        acceleratorPedalSpriteTapped = false
     }
     
     required public init?(coder aDecoder: NSCoder) {
