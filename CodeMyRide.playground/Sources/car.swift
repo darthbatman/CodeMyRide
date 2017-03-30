@@ -109,9 +109,14 @@ public class Car: SKView {
         
         presentScene(scene)
         
-        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+        _ = Timer.scheduledTimer(withTimeInterval: 0.0001, repeats: true) { timer in
             
-            
+            if (self.backgroundSprite0.frame.maxX <= 0){
+                self.backgroundSprite0.position = CGPoint(x: self.backgroundSprite1.position.x + 512, y: 256)
+            }
+            if (self.backgroundSprite1.frame.maxX <= 0){
+                self.backgroundSprite1.position = CGPoint(x: self.backgroundSprite0.position.x + 512, y: 256)
+            }
             
         }
         
@@ -122,8 +127,8 @@ public class Car: SKView {
             isInMotion = true
             wheelBackSprite.run(SKAction.repeatForever((SKAction.rotate(byAngle: (-2) * .pi, duration: 2))), withKey: "rotate")
         wheelFrontSprite.run(SKAction.repeatForever((SKAction.rotate(byAngle: (-2) * .pi, duration: 2))), withKey: "rotate")
-        backgroundSprite0.run(SKAction.repeatForever((SKAction.sequence([SKAction.moveBy(x: -512, y: 0, duration: 3), SKAction.move(to: CGPoint(x: 256, y: 256), duration: 0)]))), withKey: "scroll")
-        backgroundSprite1.run(SKAction.repeatForever((SKAction.sequence([SKAction.moveBy(x: -512, y: 0, duration: 3), SKAction.move(to: CGPoint(x: 256 + 512, y: 256), duration: 0)]))), withKey: "scroll")
+        backgroundSprite0.run(SKAction.repeatForever((SKAction.sequence([SKAction.moveBy(x: -512, y: 0, duration: 3)]))), withKey: "scroll")
+        backgroundSprite1.run(SKAction.repeatForever((SKAction.sequence([SKAction.moveBy(x: -512, y: 0, duration: 3)]))), withKey: "scroll")
         carBodySprite.run(SKAction.repeatForever(SKAction.sequence([SKAction.moveBy(x: 0, y: 3, duration: 0.24), SKAction.moveBy(x: 0, y: -3, duration: 0.24)])), withKey: "bounce")
         wheelBackSprite.run(SKAction.repeatForever(SKAction.sequence([SKAction.moveBy(x: 0, y: 3, duration: 0.24), SKAction.moveBy(x: 0, y: -3, duration: 0.24)])), withKey: "bounce")
         wheelFrontSprite.run(SKAction.repeatForever(SKAction.sequence([SKAction.moveBy(x: 0, y: 3, duration: 0.24), SKAction.moveBy(x: 0, y: -3, duration: 0.24)])), withKey: "bounce")
@@ -133,14 +138,14 @@ public class Car: SKView {
         }
     }
     
-    public func slowDown(){
-        wheelBackSprite.run(SKAction.repeatForever((SKAction.rotate(byAngle: (-1) * .pi, duration: 2))))
-        wheelFrontSprite.run(SKAction.repeatForever((SKAction.rotate(byAngle: (-1) * .pi, duration: 2))))
-        backgroundSprite0.removeAction(forKey: "scroll")
-        backgroundSprite1.removeAction(forKey: "scroll")
-        backgroundSprite0.run(SKAction.repeatForever((SKAction.sequence([SKAction.moveBy(x: -512, y: 0, duration: 6), SKAction.move(to: CGPoint(x: 256, y: 256), duration: 0)]))), withKey: "scroll")
-        backgroundSprite1.run(SKAction.repeatForever((SKAction.sequence([SKAction.moveBy(x: -512, y: 0, duration: 6), SKAction.move(to: CGPoint(x: 256 + 512, y: 256), duration: 0)]))), withKey: "scroll")
-    }
+//    public func slowDown(){
+//        wheelBackSprite.run(SKAction.repeatForever((SKAction.rotate(byAngle: (-1) * .pi, duration: 2))))
+//        wheelFrontSprite.run(SKAction.repeatForever((SKAction.rotate(byAngle: (-1) * .pi, duration: 2))))
+//        backgroundSprite0.removeAction(forKey: "scroll")
+//        backgroundSprite1.removeAction(forKey: "scroll")
+//        backgroundSprite0.run(SKAction.repeatForever((SKAction.sequence([SKAction.moveBy(x: -512, y: 0, duration: 6), SKAction.move(to: CGPoint(x: 256, y: 256), duration: 0)]))), withKey: "scroll")
+//        backgroundSprite1.run(SKAction.repeatForever((SKAction.sequence([SKAction.moveBy(x: -512, y: 0, duration: 6), SKAction.move(to: CGPoint(x: 256 + 512, y: 256), duration: 0)]))), withKey: "scroll")
+//    }
     
     public func stop(){
         isInMotion = false
@@ -173,16 +178,13 @@ public class Car: SKView {
     }
     
     public func turnOnWiper(){
-        print("on")
         if (!isWiping){
-            print("actually on")
             isWiping = true
             wiperSprite.run(SKAction.repeatForever(SKAction.sequence([SKAction.rotate(byAngle: 0.08 * .pi, duration: 1), SKAction.rotate(byAngle: -0.08 * .pi, duration: 1)])), withKey: "wipe")
         }
     }
     
     public func turnOffWiper(){
-        print("off")
         wiperSprite.removeAction(forKey: "wipe")
         isWiping = false
         wiperSprite.run(SKAction.rotate(toAngle: 0, duration: 1))
@@ -220,15 +222,12 @@ public class Car: SKView {
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if (abs((touches.first?.location(in: brakePedalSprite).x)!) <= (brakePedalSprite.size.width / 2) && abs((touches.first?.location(in: brakePedalSprite).y)!) <= (brakePedalSprite.size.height / 2)){
-            print("brakePedalSprite tapped")
             brakePedalSpriteTapped = true
         }
         else if (abs((touches.first?.location(in: acceleratorPedalSprite).x)!) <= (acceleratorPedalSprite.size.width / 2) && abs((touches.first?.location(in: acceleratorPedalSprite).y)!) <= (acceleratorPedalSprite.size.height / 2)){
-            print("acceleratorPedalSprite tapped")
             acceleratorPedalSpriteTapped = true
         }
         else if (abs((touches.first?.location(in: rainButton).x)!) <= (rainButton.size.width / 2) && abs((touches.first?.location(in: rainButton).y)!) <= (rainButton.size.height / 2)){
-            print("rainButton tapped")
             rainButtonTapped = true
             if (!isRaining){
                 startRaining()
@@ -240,7 +239,6 @@ public class Car: SKView {
             }
         }
         else if (abs((touches.first?.location(in: dayNightButton).x)!) <= (dayNightButton.size.width / 2) && abs((touches.first?.location(in: dayNightButton).y)!) <= (dayNightButton.size.height / 2)){
-            print("dayNightButton tapped")
             dayNightButtonTapped = true
             if (isDay){
                 becomeNight()
@@ -254,7 +252,6 @@ public class Car: SKView {
     }
     
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touches ended")
         brakePedalSpriteTapped = false
         acceleratorPedalSpriteTapped = false
         rainButtonTapped = false

@@ -5,7 +5,7 @@ let car = Car()
 
 PlaygroundPage.current.liveView = car
 
-_ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+_ = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { timer in
     if (car.acceleratorPedalSpriteTapped){
         car.speedUp()
     }
