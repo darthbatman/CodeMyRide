@@ -22,10 +22,12 @@ _ = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { timer in
     else if (car.isWiping) {
         car.turnOffWiper()
     }
-    if (car.isDay){
+    if (car.isDay && car.headlightIsOn){
         car.turnOffHeadlight()
     }
-    else {
+    else if (!car.isDay && !car.headlightIsOn) {
         car.turnOnHeadlight()
     }
 }
+
+// explain functions, if, else, else, if
