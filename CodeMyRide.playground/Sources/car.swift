@@ -167,6 +167,12 @@ public class Car: SKView {
     }
     
     public func stop(){
+        if (isInMotion){
+            carDrivingAudioPlayer.stop()
+            carBrakingAudioPlayer.volume = 0.02
+            carBrakingAudioPlayer.prepareToPlay()
+            carBrakingAudioPlayer.play()
+        }
         isInMotion = false
         wheelBackSprite.removeAction(forKey: "rotate")
         wheelFrontSprite.removeAction(forKey: "rotate")
@@ -178,10 +184,6 @@ public class Car: SKView {
         headlightSprite.removeAction(forKey: "bounce")
         brakelightSprite.removeAction(forKey: "bounce")
         wiperSprite.removeAction(forKey: "bounce")
-        carDrivingAudioPlayer.stop()
-        carBrakingAudioPlayer.volume = 0.02
-        carBrakingAudioPlayer.prepareToPlay()
-        carBrakingAudioPlayer.play()
     }
     
     public func turnOnHeadlight(){

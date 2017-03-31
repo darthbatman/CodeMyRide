@@ -6,6 +6,10 @@ let car = Car()
 PlaygroundPage.current.liveView = car
 
 _ = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { timer in
+    
+//: # CodeMyRide
+//: In this Swift Playground, you will learn some programming fundamentals.
+    
     if (car.acceleratorPedalSpriteTapped){
         car.speedUp()
     }
@@ -28,6 +32,7 @@ _ = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { timer in
     else if (!car.isDay && !car.headlightIsOn) {
         car.turnOnHeadlight()
     }
+    
 }
 
 // explain functions, if, else, else, if
