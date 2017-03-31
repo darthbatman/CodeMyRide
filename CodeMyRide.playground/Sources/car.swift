@@ -39,6 +39,10 @@ public class Car: SKView {
     public var headlightClickAudioPlayer: AVAudioPlayer = AVAudioPlayer()
     public var backgroundMusicAudioPlayer: AVAudioPlayer = AVAudioPlayer()
     
+    public var rainButtonLabel: SKLabelNode = SKLabelNode()
+    public var dayNightButtonLabel: SKLabelNode = SKLabelNode()
+    public var carLabel: SKLabelNode = SKLabelNode()
+    
     public init(){
         
         let frame = CGRect(x: 0, y: 0, width: 512, height: 512)
@@ -111,10 +115,23 @@ public class Car: SKView {
         rainButton.color = UIColor.blue
         scene.addChild(rainButton)
         
+        rainButtonLabel = SKLabelNode(text: "Rain")
+        rainButtonLabel.fontSize = 20
+        rainButton.addChild(rainButtonLabel)
+        
         dayNightButton.size = CGSize(width: 50, height: 50)
         dayNightButton.position = CGPoint(x: 120, y: 30)
         dayNightButton.color = UIColor.black
         scene.addChild(dayNightButton)
+        
+        dayNightButtonLabel = SKLabelNode(text: "Night")
+        dayNightButtonLabel.fontSize = 20
+        dayNightButton.addChild(dayNightButtonLabel)
+        
+        carLabel = SKLabelNode(text: "Car")
+        carLabel.fontSize = 40
+        carLabel.position = CGPoint(x: -20, y: -40)
+        carBodySprite.addChild(carLabel)
         
         do {
             carDrivingAudioPlayer = try AVAudioPlayer(contentsOf: NSURL(fileURLWithPath: Bundle.main.path(forResource: "car_driving", ofType: "wav")!) as URL)
