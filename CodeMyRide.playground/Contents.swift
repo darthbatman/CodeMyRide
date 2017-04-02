@@ -1,8 +1,10 @@
+// Rishi Masand (2017)
+
 import PlaygroundSupport
 import Foundation
 //: # CodeMyRide
 //: In this Swift Playground, you will learn some programming fundamentals.
-//: We will be using the scene to the right to depict the effects of the code on this side.
+//: We will be using the scene to the right to depict the effects of the code written below.
 //: ## Constants, Variables, Classes, and Objects
 //: To begin with, we are creating the constant "car" with the keyword "let". A constant stores a value that cannot be changed.
 let car = Car()
@@ -28,15 +30,15 @@ _ = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { timer in
     }
     if (car.isRaining){
 //: ## Functions
-//: Functions are used to call other blocks of code that perform an action or series of actions. The function below, "car.turnOnWiper()", turns on the cars windshield wiper.
+//: Functions are used to call other blocks of code that perform an action or series of actions. The function below, "car.turnOnWiper()", turns on the car's windshield wiper.
         car.turnOnWiper()
     }
     else if (car.isWiping) {
-//: This next function, "car.turnOffWiper()", turns off the cars windshield wiper.
+//: This next function, "car.turnOffWiper()", turns off the car's windshield wiper.
         car.turnOffWiper()
     }
 //: ## More Conditionals
-//: In the "if" statement below, there are two conditions, separated by "&&". This character sequence means both conditions need to be true for the code in the if statement to be executed. If the separating characters were instead "||", it would mean either one of the conditions can be true for the code in the if statement to execute.
+//: In the "if" statement below, there are two conditions, separated by "&&". This character sequence, signifying "AND", means both conditions need to be true for the code in the if statement to be executed. If the separating characters were instead "||", signifying "OR", it would mean either one of the conditions can be true for the code in the if statement to execute.
     if (car.isDay && car.headlightIsOn){
         car.turnOffHeadlight()
         car.dayNightButtonLabel.text = "Night"
@@ -50,12 +52,10 @@ _ = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true) { timer in
 }
 //: ## Try It Out
 //: Now that you understand some of the fundamentals of programming, interact with the scene on the right, using the rain, night/day, brake, and accelerator buttons. Relate their actions and operations with the code written above.
-
 //: ## Instructions
-//: Tap the "Rain" button to toggle rain on and off.
-//: Tap the "Night/Day" button to switch between nighttime and daytime.
-//: Tap the "Accelearator" button (the pedal to the far right), to make the car begin driving.
-//: Tap the "Brake" button (the pedal to the left of the accelerator pedal), to make the car stop.
-//: Turn up the volume to hear background music and sound effects.
-
+//: * Tap the "Rain" button to toggle rain on and off.
+//: * Tap the "Night/Day" button to switch between nighttime and daytime.
+//: * Tap the "Accelerator" button (the pedal to the far right), to make the car begin driving.
+//: * Tap the "Brake" button (the pedal to the left of the accelerator pedal), to make the car stop.
+//: * Turn up the volume to hear background music and sound effects.
 //: # Enjoy!
